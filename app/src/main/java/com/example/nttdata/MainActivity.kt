@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.*
 import androidx.compose.ui.layout.*
 import com.skydoves.landscapist.*
 import com.skydoves.landscapist.coil3.*
-//Cambioooooooooooooossssss
+//Cambioooooooooooooossssssssssss
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
