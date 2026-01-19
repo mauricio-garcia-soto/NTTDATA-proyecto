@@ -1,5 +1,6 @@
 package com.example.nttdata
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -32,6 +34,7 @@ class Pagina2 : ComponentActivity() {
 }
 @Composable
 fun IPhone16ProMax3() {
+    val context = LocalContext.current
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -76,7 +79,10 @@ fun IPhone16ProMax3() {
             }
 
             OutlinedButton(
-                onClick = { println("Pressed!") },
+                onClick = {
+                    val intent = Intent(context, ReservationActivity::class.java)
+                    context.startActivity(intent)
+                },
                 colors = ButtonDefaults.outlinedButtonColors(
                     containerColor = Color.Transparent
                 ),

@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Pagina2"></activity>
+        <activity android:name=".ReservationActivity"></activity>
     </application>
 
 </manifest>
