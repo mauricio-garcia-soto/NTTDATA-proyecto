@@ -45,6 +45,8 @@ dependencies {
     implementation("com.github.skydoves:landscapist-coil3:2.3.0")
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("androidx.compose.material3:material3:1.3.1")
+    implementation("org.postgresql:postgresql:42.6.0")
+    implementation("androidx.navigation:navigation-compose:2.7.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

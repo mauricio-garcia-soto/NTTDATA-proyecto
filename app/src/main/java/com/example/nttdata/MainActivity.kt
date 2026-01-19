@@ -1,5 +1,7 @@
 package com.example.nttdata
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,8 +22,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.PreparedStatement
+import java.sql.ResultSet
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +55,7 @@ fun LoginScreen() {
     // Estados de los campos
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-
+    val context=LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -127,7 +138,7 @@ fun LoginScreen() {
 
         // Botón Iniciar Sesión
         Button(
-            onClick = { println("Iniciar sesión") },
+            onClick = { iniciarSesion(context) },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0072BB)),
             shape = RoundedCornerShape(15.dp),
             modifier = Modifier
@@ -144,3 +155,56 @@ fun LoginScreen() {
     }
 
 }
+
+fun inciarSesion(context: Context) {
+
+    // 1. Datos de conexión
+    val host = "nttdata.c0vvcxvxqoto.us-east-1.rds.amazonaws.com"
+    val port = 5432
+    val database = "nttdata"
+    val dbUser = "nttdata"
+    val dbPassword = "TU_PASSWORD_AQUI" // reemplaza con tu contraseña
+
+    val url = "jdbc:postgresql://$host:$port/$database"
+
+    var connection: Connection? = null
+
+    try {
+        // 2. Conectarse a la base de datos
+        connection = DriverManager.getConnection(url, dbUser, dbPassword)
+        println("Conexión exitosa a la base de datos!")
+
+        // 3. Pedir usuario y contraseña
+        print("Usuario: ")
+        val inputUser = readLine() ?: ""
+        print("Contraseña: ")
+        val inputPass = readLine() ?: ""
+
+        // 4. Consulta segura con PreparedStatement
+        val sql = "SELECT * FROM usuarios WHERE nombre = ? AND contrasena = ?"
+        val stmt: PreparedStatement = connection.prepareStatement(sql)
+        stmt.setString(1, inputUser)
+        stmt.setString(2, inputPass)
+
+        val rs: ResultSet = stmt.executeQuery()
+
+        if (rs.next()) {
+            println("¡Login exitoso! Bienvenido ${rs.getString("nombre")}")
+            val intent = Intent(context, Pagina2::class.java)
+            context.startActivity(intent)
+        } else {
+            println("Error: Usuario o contraseña incorrectos")
+        }
+
+        // 5. Cerrar recursos
+        rs.close()
+        stmt.close()
+
+    } catch (e: Exception) {
+        println("Error de conexión o consulta: ${e.message}")
+        e.printStackTrace()
+    } finally {
+        connection?.close()
+    }
+}
+
