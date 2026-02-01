@@ -1,5 +1,6 @@
 package com.example.nttdata
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,18 +27,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 
-class ReservationActivity : ComponentActivity() {
+class ModificarActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ReservationScreen()
+            ModificarScreen()
         }
     }
 }
 
 @Composable
-fun ReservationScreen() {
+fun ModificarScreen() {
     val scrollState = rememberScrollState()
 
     Column(
@@ -76,7 +77,7 @@ fun ReservationScreen() {
                 .padding(24.dp)
         ) {
             Text(
-                text = "Introduce datos para la reserva:",
+                text = "Modifica los datos de la reserva:",
                 color = Color(0xFF0072BB),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -84,10 +85,10 @@ fun ReservationScreen() {
             )
 
             // Form Fields
-            ModificarField(label = "Sucursal", value = "Castellon de la plana (UJI)")
-            ModificarField(label = "Fecha", value = "19/12/2025")
-            ModificarField(label = "Hora:", value = "10:00-13:00")
-            ModificarField(label = "Espacio de Trabajo Preferido:", value = "5b")
+            ReservationField(label = "Sucursal", value = "Castellon de la plana (UJI)")
+            ReservationField(label = "Fecha", value = "19/12/2025")
+            ReservationField(label = "Hora:", value = "10:00-13:00")
+            ReservationField(label = "Espacio de Trabajo Preferido:", value = "5b")
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -100,7 +101,7 @@ fun ReservationScreen() {
                     .height(50.dp)
             ) {
                 Text(
-                    text = "Ver Disponibilidad",
+                    text = "Confirmar cambios",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
@@ -135,7 +136,7 @@ fun ReservationScreen() {
                 tint = Color.White.copy(alpha = 0.6f),
                 modifier = Modifier.size(30.dp)
             )
-             Icon(
+            Icon(
                 imageVector = Icons.Default.CheckCircle,
                 contentDescription = "Estado",
                 tint = Color.Red, // As seen in image (green/red icon), using Red circle for now
@@ -146,7 +147,7 @@ fun ReservationScreen() {
 }
 
 @Composable
-fun ReservationField(label: String, value: String) {
+fun ModificarField(label: String, value: String) {
     Column(modifier = Modifier.padding(bottom = 16.dp)) {
         Text(
             text = label,
@@ -175,6 +176,6 @@ fun ReservationField(label: String, value: String) {
 
 @Composable
 @Preview
-fun PreviewReservationScreen() {
-    ReservationScreen()
+fun PreviewModificarScreen() {
+    ModificarScreen()
 }

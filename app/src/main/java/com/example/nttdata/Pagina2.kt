@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 class Pagina2 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,5 +113,10 @@ fun IPhone16ProMax3() {
             ) { textStyle("Consultar Estado Sucursal") }
         }
     }
+}
+@Preview
+@Composable
+fun preview(){
+    IPhone16ProMax3()
 }
 

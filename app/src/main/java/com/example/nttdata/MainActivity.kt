@@ -138,7 +138,7 @@ fun LoginScreen() {
 
         // Botón Iniciar Sesión
         Button(
-            onClick = { iniciarSesion(context) },
+            onClick = { inciarSesion(context)},
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0072BB)),
             shape = RoundedCornerShape(15.dp),
             modifier = Modifier
