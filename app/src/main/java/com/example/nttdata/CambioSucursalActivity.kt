@@ -21,7 +21,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter.Companion.tint
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -54,20 +56,20 @@ fun CambioSucursalScreen() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(80.dp)
                 .background(Color(0xFF0072BB))
-                .padding(vertical = 12.dp, horizontal = 16.dp),
+                .padding( horizontal = 16.dp),
             contentAlignment = Alignment.CenterStart
         ) {
             Image(
-                painter = rememberAsyncImagePainter(
-                    "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/81XQccjZHz/6jwa1p2b_expires_30_days.png"
-                ),
+                painter = painterResource(R.drawable.logo),
                 contentDescription = "NTT DATA Logo",
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
-                    .height(40.dp)
-                    .width(180.dp),
-                alignment = Alignment.CenterStart
+                    .fillMaxHeight(0.9f)
+                    .width(10000.dp)
+                    .wrapContentWidth(),
+                colorFilter =  tint(Color.White)
             )
         }
 
